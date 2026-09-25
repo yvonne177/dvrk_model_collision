@@ -23,7 +23,7 @@
       <collision name="roll_collision">
         <origin rpy="-${PI_2} 0.0 ${PI_2}" xyz="0.0 0.0 0.02975"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/roll/4670/roll_4670_collision_convex_cylinder.obj" scale="0.1 0.1 0.1"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/roll/4670/collision_hulls/roll_4670_convex_hull_00.obj" scale="0.1 0.1 0.1"/>
         </geometry>
         <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>

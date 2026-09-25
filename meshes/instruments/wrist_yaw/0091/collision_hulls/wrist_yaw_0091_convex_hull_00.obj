@@ -1,6 +1,6 @@
 # Simplified collision mesh sized from wrist_yaw_0091.obj
-mtllib wrist_yaw_0091_collision_geometric.mtl
-o wrist_yaw_collision_elliptic_cylinder
+mtllib wrist_yaw_0091_convex_hull_00.mtl
+o wrist_yaw_0091_convex_hull_00
 v 0.000615000 0.000000000 -0.002609000
 v 0.000603193 0.000119981 -0.002609000
 v 0.000568224 0.000235350 -0.002609000

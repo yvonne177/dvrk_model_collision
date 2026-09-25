@@ -20,10 +20,10 @@
         </geometry>
       </visual>
 
-      <collision>
+      <collision name="wrist_yaw_collision_00">
         <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.000236"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/wrist_yaw/0091/wrist_yaw_0091_collision_geometric.obj"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_yaw/0091/collision_hulls/wrist_yaw_0091_convex_hull_00.obj"/>
         </geometry>
         <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>
