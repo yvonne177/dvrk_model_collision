@@ -21,10 +21,11 @@
         <material name="roll_4670_shaft"><color rgba="0.55 0.55 0.55 1"/></material>
       </visual>
       <collision>
-        <origin rpy="-${PI_2} 0.0 0.0" xyz="0.0 0.0 0.02975"/>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.33627975"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/roll/4670/roll_4670_collision_geometric.obj" scale="0.1 0.1 0.1"/>
+          <cylinder radius="0.0043725" length="0.5596247"/>
         </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>
     </link>
   </xacro:macro>

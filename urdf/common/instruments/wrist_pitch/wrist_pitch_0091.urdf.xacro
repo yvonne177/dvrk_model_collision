@@ -19,11 +19,89 @@
           <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/wrist_pitch_0091.obj" scale="0.1 0.1 0.1"/>
         </geometry>
       </visual>
-      <collision>
+      <collision name="wrist_pitch_collision_00">
         <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/wrist_pitch_0091_collision_geometric.STL" scale="0.1 0.1 0.1"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_00.obj" scale="0.1 0.1 0.1"/>
         </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_01">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_01.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_02">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_02.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_03">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_03.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_04">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_04.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_05">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_05.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_06">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_06.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_07">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_07.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_08">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_08.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_09">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_09.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_10">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_10.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="wrist_pitch_collision_11">
+        <origin rpy="0.0 ${PI_2} ${PI_2}" xyz="0.0295 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_pitch/0091/collision_hulls/wrist_pitch_0091_convex_hull_11.obj" scale="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>
 
     </link>

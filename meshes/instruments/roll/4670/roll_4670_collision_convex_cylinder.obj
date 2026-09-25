@@ -1,6 +1,6 @@
 # Convex cylinder collision mesh fitted from roll_4670.obj
-mtllib roll_4670_collision_geometric.mtl
-o roll_4670_collision_cylinder
+mtllib roll_4670_collision_convex_cylinder.mtl
+o roll_4670_collision_convex_cylinder
 v 0.043724000 0.267174000 0.000000500
 v 0.042883836 0.267174000 0.008530824
 v 0.040395633 0.267174000 0.016733333

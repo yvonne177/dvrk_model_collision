@@ -159,3 +159,17 @@ reference origin:
 python3 scripts/verify_instrument_visual.py --instrument 420006
 python3 scripts/verify_instrument_visual.py --all
 ~~~~
+
+## Instrument Collision Visualization
+
+Launch RViz with visual geometry translucent and collision geometry overlaid:
+
+```bash
+ros2 launch dvrk_model arm.launch.py \
+  arm:=PSM1 generation:=Si instrument:=420006 \
+  simulated:=false collision_debug:=true
+```
+
+Use the Displays panel to toggle `Visual Geometry` and `Collision Geometry`
+independently. A link with visual geometry but no collision overlay has no
+`<collision>` element in the expanded URDF.

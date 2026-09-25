@@ -35,12 +35,77 @@
           <mesh filename="package://dvrk_model/meshes/instruments/tip/006/tip_006_1.obj"/>
         </geometry>
       </visual>
-      <collision>
+      <collision name="jaw_1_collision_00">
         <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/tip_006_1_collision_geometric.obj"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_00.obj"/>
         </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>
+      <collision name="jaw_1_collision_01">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_01.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_02">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_02.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_03">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_03.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_04">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_04.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_05">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_05.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_06">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_06.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_07">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_07.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_08">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_08.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_1_collision_09">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_1_convex_hull_09.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+
     </link>
 
     <joint name="jaw_2" type="revolute">
@@ -59,12 +124,77 @@
           <mesh filename="package://dvrk_model/meshes/instruments/tip/006/tip_006_2.obj"/>
         </geometry>
       </visual>
-      <collision>
+      <collision name="jaw_2_collision_00">
         <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/tip_006_2_collision_geometric.obj"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_00.obj"/>
         </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>
+      <collision name="jaw_2_collision_01">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_01.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_02">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_02.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_03">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_03.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_04">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_04.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_05">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_05.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_06">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_06.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_07">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_07.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_08">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_08.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+      <collision name="jaw_2_collision_09">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://dvrk_model/meshes/instruments/tip/006/collision_hulls/tip_006_2_convex_hull_09.obj"/>
+        </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+      </collision>
+
     </link>
 
     <joint name="tool_tip" type="fixed">

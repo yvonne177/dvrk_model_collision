@@ -23,8 +23,9 @@
       <collision>
         <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.000236"/>
         <geometry>
-          <cylinder radius="0.005" length="0.010"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/wrist_yaw/0091/wrist_yaw_0091_collision_geometric.obj"/>
         </geometry>
+        <material name="collision_red"><color rgba="1.0 0.0 0.0 1.0"/></material>
       </collision>
 
     </link>
