@@ -144,7 +144,7 @@ When adding a new tool family, keep common geometry shared and only add new file
 3. Reuse the existing roll and shaft assembly in [urdf/common/instrument.urdf.xacro](urdf/common/instrument.urdf.xacro) unless the shaft length or roll geometry truly changes.
 4. Add a new part file under `urdf/common/instruments/<part>/` only when the tool needs a distinct physical stage.
 5. Reuse the shared files in `urdf/common/instruments/housing/`, `roll/`, `wrist_pitch/`, `wrist_yaw/`, and `tip/` wherever the mechanical build matches an existing stage.
-6. Add the model-to-part mapping in [urdf/common/instruments/instruments.yaml](urdf/common/instruments/instruments.yaml). Use `tip: placeholder` when tip geometry is unavailable. The stage file must define a macro matching its filename, accepting `prefix` and, except for housing, `add_colors:=false`.
+6. Add the model-to-part mapping in [urdf/common/instruments/instruments.yaml](urdf/common/instruments/instruments.yaml). Use `tip: placeholder` when tip geometry is unavailable. The stage file must define a macro matching its filename, accepting `prefix` and, except for housing, `add_colors:=false`. Housing macros accept `variant:=default`.
    For an interleaved snake wrist, select `wrist: '0034'` instead of separate
    `wrist_pitch` / `wrist_yaw` stages.
 7. Validate the result by expanding the xacro for at least one Classic or Si arm that uses the new code.
@@ -198,6 +198,35 @@ If `instrument` is omitted, `arm.launch.py` selects by generation:
 For Si 420006, default mesh paths in URDF/Xacro use the current OBJ files
 (`housing_Si.obj`, `roll_4670.obj`, `wrist_pitch_0091.obj`, `wrist_yaw_0091.obj`,
 `tip_006_1.obj`, `tip_006_2.obj`) and not the `_archived.stl` files.
+
+### Clinical and training housing colors
+
+Both Classic and Si instruments support `housing_variant` in direct Xacro
+expansion and ROS 2 `arm.launch.py` / `arm_state_publishers.launch.py`:
+
+- `housing_variant:=clinical`: blue-grey cover.
+- `housing_variant:=training`: red cover.
+- `housing_variant:=default` (omitted): original appearance, clinical for
+  Classic instruments and training for Si instruments.
+
+The variant follows the selected **instrument**, independently of the arm's
+`generation`. Only the cover materials change; geometry, hardware materials,
+collision meshes, and kinematics are unchanged. Virtual instruments still omit
+the housing.
+
+The original Classic clinical mesh is
+`meshes/instruments/housing/Classic/housing_Classic_body.dae`; the red copy is
+`housing_Classic_body_training.dae` in the same folder. The original Si training
+mesh is `meshes/instruments/housing/Si/housing_Si.obj`; the blue-grey copy is
+`housing_Si_clinical.obj` with `housing_Si_clinical.mtl`. The Si OBJ copy differs
+only in its material-library reference, so consumers that read embedded mesh
+materials also get the selected cover color without a whole-housing override.
+
+```bash
+ros2 launch dvrk_model arm.launch.py arm:=PSM1 generation:=Classic housing_variant:=training
+ros2 launch dvrk_model arm.launch.py arm:=PSM1 generation:=Si housing_variant:=clinical
+ros2 run xacro xacro urdf/Si/PSM1.urdf.xacro instrument:=420006 housing_variant:=clinical
+```
 
 ### Examples
 

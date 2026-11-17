@@ -155,7 +155,12 @@ def create_robot_description(context):
                 instrument, full_name, VALID_INSTRUMENT_OPTIONS))
 
     show_rcm = context.launch_configurations.get('show_rcm', 'true').strip()
-    mappings = {'arm': full_name, 'instrument': instrument, 'show_rcm': show_rcm}
+    housing_variant = context.launch_configurations.get('housing_variant', 'default')
+    require_choice('housing_variant', housing_variant, ['default', 'clinical', 'training'])
+    mappings = {
+        'arm': full_name, 'instrument': instrument, 'show_rcm': show_rcm,
+        'housing_variant': housing_variant,
+    }
     if full_name == 'ECM' and endoscope != '':
         mappings['endoscope'] = endoscope
     if context.launch_configurations.get('suj') == 'true':
@@ -257,6 +262,11 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument('instrument', default_value=''),
         DeclareLaunchArgument('endoscope', default_value=''),
+        DeclareLaunchArgument(
+            'housing_variant',
+            default_value='default',
+            choices=['default', 'clinical', 'training'],
+            description='PSM cover color: original, clinical blue-grey, or training red'),
         DeclareLaunchArgument(
             'direct_control',
             default_value='false',

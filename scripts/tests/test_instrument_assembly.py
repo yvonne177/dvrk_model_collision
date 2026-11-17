@@ -139,6 +139,91 @@ class InstrumentAssemblyTest(unittest.TestCase):
         urdf = self.expand()
         self.assertIsNotNone(urdf.find("link[@name='PSM1_jaw_link']/visual/geometry/box"))
 
+    def test_housing_variants_preserve_geometry_and_collision(self):
+        source = Path(__file__).resolve().parents[2]
+        for generation in ("Classic", "Si"):
+            for arm in ("PSM1", "PSM2", "PSM3"):
+                for instrument, original, alternate, alternate_variant in (
+                    ("400006", "Classic/housing_Classic_body.dae",
+                     "Classic/housing_Classic_body_training.dae", "training"),
+                    ("420006", "Si/housing_Si.obj",
+                     "Si/housing_Si_clinical.obj", "clinical"),
+                ):
+                    entry = str(self.root / f"urdf/{generation}/{arm}.urdf.xacro")
+                    baseline = ET.fromstring(xacro.process_file(
+                        entry, mappings={"instrument": instrument},
+                    ).toxml())
+                    mesh_path = f"link[@name='{arm}_housing_link']/visual/geometry/mesh"
+                    original_uri = baseline.find(mesh_path).get("filename")
+                    self.assertTrue(original_uri.endswith(original))
+                    for variant in ("default", "clinical", "training"):
+                        with self.subTest(generation=generation, arm=arm,
+                                          instrument=instrument, variant=variant):
+                            urdf = ET.fromstring(xacro.process_file(
+                                entry, mappings={
+                                    "instrument": instrument, "housing_variant": variant,
+                                },
+                            ).toxml())
+                            mesh = urdf.find(mesh_path)
+                            expected = alternate if variant == alternate_variant else original
+                            self.assertEqual(
+                                mesh.get("filename"),
+                                f"package://dvrk_model/meshes/instruments/housing/{expected}",
+                            )
+                            self.assertTrue((source / mesh.get("filename").replace(
+                                "package://dvrk_model/", "")).is_file())
+                            mesh.set("filename", original_uri)
+                            self.assertEqual(ET.tostring(urdf), ET.tostring(baseline))
+
+    def test_housing_assets_only_change_cover_materials(self):
+        housing = Path(__file__).resolve().parents[2] / "meshes/instruments/housing"
+        ns = {"c": "http://www.collada.org/2005/11/COLLADASchema"}
+        original = ET.parse(housing / "Classic/housing_Classic_body.dae")
+        training = ET.parse(housing / "Classic/housing_Classic_body_training.dae")
+        effect = ".//c:effect[@id='SWMaterial-fx-0']"
+        clinical_color = original.find(effect + "//c:diffuse/c:color", ns).text
+        training_color = training.find(effect + "//c:diffuse/c:color", ns).text
+        self.assertEqual(
+            [float(v) for v in training_color.split()],
+            [0.748401, 0.014784, 0.001197, 1],
+        )
+        for component in ("ambient", "diffuse", "specular"):
+            path = effect + f"//c:{component}/c:color"
+            training.find(path, ns).text = original.find(path, ns).text
+        self.assertEqual(ET.tostring(training.getroot()), ET.tostring(original.getroot()))
+
+        obj = (housing / "Si/housing_Si.obj").read_bytes()
+        clinical_obj = (housing / "Si/housing_Si_clinical.obj").read_bytes()
+        self.assertIn(b"mtllib housing_Si_clinical.mtl", clinical_obj)
+        self.assertEqual(
+            clinical_obj.replace(b"mtllib housing_Si_clinical.mtl", b"mtllib housing_Si.mtl"),
+            obj,
+        )
+        original_mtl = (housing / "Si/housing_Si.mtl").read_text()
+        clinical_mtl = (housing / "Si/housing_Si_clinical.mtl").read_text()
+        blue_grey = "Kd " + " ".join(clinical_color.split()[:3])
+        red = "Kd " + " ".join(training_color.split()[:3])
+        self.assertIn(blue_grey, clinical_mtl.split("newmtl Shape.035\n")[1].split("newmtl")[0])
+        self.assertEqual(clinical_mtl.replace(blue_grey, red), original_mtl)
+
+    def test_invalid_housing_variant_fails(self):
+        for instrument in ("400006", "420006"):
+            with self.subTest(instrument=instrument), self.assertRaises(xacro.XacroException):
+                xacro.process_file(
+                    str(self.root / "urdf/Si/PSM1.urdf.xacro"),
+                    mappings={"instrument": instrument, "housing_variant": "unknown"},
+                )
+
+    def test_virtual_instruments_still_omit_housing_for_both_variants(self):
+        for arm in ("PSM1", "PSM2", "PSM3"):
+            for variant in ("clinical", "training"):
+                with self.subTest(arm=arm, variant=variant):
+                    urdf = ET.fromstring(xacro.process_file(
+                        str(self.root / f"urdf/Virtual/{arm}.urdf.xacro"),
+                        mappings={"housing_variant": variant},
+                    ).toxml())
+                    self.assertIsNone(urdf.find(f"link[@name='{arm}_housing_link']"))
+
     def test_missing_part_fails_instead_of_using_placeholder(self):
         self.table["instruments"]["420006"]["tip"] = "999"
         with self.assertRaises(xacro.XacroException) as error:

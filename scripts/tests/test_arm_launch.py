@@ -2,6 +2,7 @@
 
 import importlib.util
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from unittest.mock import patch
 
@@ -59,3 +60,56 @@ class ArmLaunchTest(unittest.TestCase):
     def test_unsupported_instrument_is_rejected(self):
         with self.assertRaisesRegex(RuntimeError, "Unsupported PSM instrument: 999999"):
             self.create_robot("PSM1", "Si", "999999")
+
+
+class ArmStatePublishersHousingTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.source = Path(__file__).resolve().parents[2]
+        spec = importlib.util.spec_from_file_location(
+            "arm_state_publishers_launch",
+            cls.source / "ros2/launch/arm_state_publishers.launch.py",
+        )
+        cls.launch = importlib.util.module_from_spec(spec)
+        with patch("ament_index_python.packages.get_package_share_directory",
+                   return_value=str(cls.source)):
+            spec.loader.exec_module(cls.launch)
+
+    def test_launch_applies_variant_to_selected_instrument_not_arm_generation(self):
+        for generation, instrument, variant, expected in (
+            ("Classic", "420006", "clinical", "Si/housing_Si_clinical.obj"),
+            ("Si", "400006", "training", "Classic/housing_Classic_body_training.dae"),
+            ("Classic", "400006", "clinical", "Classic/housing_Classic_body.dae"),
+            ("Si", "420006", "training", "Si/housing_Si.obj"),
+        ):
+            with self.subTest(generation=generation, variant=variant):
+                context = LaunchContext()
+                context.launch_configurations.update(
+                    arm="PSM1", generation=generation, instrument=instrument,
+                    housing_variant=variant,
+                )
+                with patch("ament_index_python.packages.get_package_share_directory",
+                           return_value=str(self.source)), patch.object(
+                               self.launch, "get_package_share_directory",
+                               return_value=str(self.source)):
+                    actions = self.launch.create_robot_description(context)
+                for action in actions:
+                    action.execute(context)
+                temporary = Path(context.launch_configurations["robot_description_file"])
+                self.addCleanup(temporary.unlink)
+                urdf = ET.fromstring(context.launch_configurations["robot_description"])
+                mesh = urdf.find("link[@name='PSM1_housing_link']/visual/geometry/mesh")
+                self.assertEqual(
+                    mesh.get("filename"),
+                    f"package://dvrk_model/meshes/instruments/housing/{expected}",
+                )
+
+    def test_invalid_housing_variant_is_rejected(self):
+        context = LaunchContext()
+        context.launch_configurations.update(
+            arm="PSM1", generation="Si", housing_variant="unknown",
+        )
+        with patch.object(self.launch, "get_package_share_directory",
+                          return_value=str(self.source)):
+            with self.assertRaisesRegex(RuntimeError, "Invalid housing_variant 'unknown'"):
+                self.launch.create_robot_description(context)

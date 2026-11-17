@@ -110,6 +110,7 @@ def generate_launch_description():
             'arm': arm,
             'generation': generation,
             'instrument': instrument,
+            'housing_variant': LaunchConfiguration('housing_variant'),
             'endoscope': endoscope,
             'use_sim_time': use_sim_time,
             'rate': rate,
@@ -140,6 +141,11 @@ def generate_launch_description():
             description='Six-digit PSM instrument model ID. Supported:\n{}'.format(
                 supported_psm_instruments_message())),
         DeclareLaunchArgument('endoscope', default_value=''),
+        DeclareLaunchArgument(
+            'housing_variant',
+            default_value='default',
+            choices=['default', 'clinical', 'training'],
+            description='PSM cover color: original, clinical blue-grey, or training red'),
         DeclareLaunchArgument('simulated', default_value='true'),
         DeclareLaunchArgument('use_sim_time', default_value='false'),
         DeclareLaunchArgument('rate', default_value='50.0'),

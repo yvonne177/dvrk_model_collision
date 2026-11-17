@@ -144,6 +144,21 @@ They also expand a temporary source tree to verify that new roll and tip
 parts are selected from the YAML without assembly changes, explicit
 placeholders work, and missing part files fail expansion.
 
+Housing regression tests cover clinical blue-grey and training red for Classic
+and Si instruments on all physical PSM entry points, including cross-generation
+selections. They check that only cover materials differ between the assets,
+collision and kinematic data stay unchanged, launch arguments select the right
+mesh, invalid variants fail, and virtual instruments still omit the housing.
+
+To visually check both cover colors (stop each launch before starting the next):
+
+```bash
+ros2 launch dvrk_model arm.launch.py arm:=PSM1 generation:=Classic housing_variant:=clinical
+ros2 launch dvrk_model arm.launch.py arm:=PSM1 generation:=Classic housing_variant:=training
+ros2 launch dvrk_model arm.launch.py arm:=PSM1 generation:=Si housing_variant:=clinical
+ros2 launch dvrk_model arm.launch.py arm:=PSM1 generation:=Si housing_variant:=training
+```
+
 ## Instrument DH and Asset Validation
 
 The DH checker compares every instrument in `instruments.yaml` with the

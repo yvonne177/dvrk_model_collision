@@ -3,7 +3,8 @@
 
   <xacro:include filename="$(find dvrk_model)/urdf/common.urdf.xacro"/>
 
-  <xacro:macro name="housing_Classic" params="prefix">
+  <xacro:macro name="housing_Classic" params="prefix variant:=default">
+    <xacro:property name="visual_mesh" value="${dict(default='housing_Classic_body.dae', clinical='housing_Classic_body.dae', training='housing_Classic_body_training.dae')[str(variant)]}"/>
     <joint name="${prefix}housing_fixed" type="fixed">
       <parent link="${prefix}adaptor_link"/>
       <child link="${prefix}housing_link"/>
@@ -14,7 +15,7 @@
       <visual>
         <origin rpy="0.0 0.0 ${PI_2}" xyz="0.0 0.0 0.041"/>
         <geometry>
-          <mesh filename="package://dvrk_model/meshes/instruments/housing/Classic/housing_Classic_body.dae"/>
+          <mesh filename="package://dvrk_model/meshes/instruments/housing/Classic/${visual_mesh}"/>
         </geometry>
       </visual>
       <collision>

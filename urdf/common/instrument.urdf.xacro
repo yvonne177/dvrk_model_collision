@@ -16,9 +16,11 @@
       prefix        — arm instance prefix, e.g. "PSM1_"
       instrument    — last 6 digits of instrument model number (e.g. "420006")
       is_virtual    — omit the instrument housing visual/collision for virtual PSMs
+      housing_variant — default (original mesh), clinical (blue-grey), or training (red)
   -->
 
   <xacro:include filename="$(find dvrk_model)/urdf/common.urdf.xacro"/>
+  <xacro:arg name="housing_variant" default="default"/>
   <xacro:property name="instrument_table"
                   value="${xacro.load_yaml('$(find dvrk_model)/urdf/common/instruments/instruments.yaml')['instruments']}"/>
 
@@ -53,12 +55,12 @@
   </xacro:macro>
 
   <xacro:macro name="instrument_model"
-               params="prefix housing roll tip wrist_pitch:=none wrist_yaw:=none wrist:=standard is_virtual:=false add_colors:=false">
+               params="prefix housing roll tip wrist_pitch:=none wrist_yaw:=none wrist:=standard is_virtual:=false add_colors:=false housing_variant:=$(arg housing_variant)">
     <!-- Part files and macro names follow the IDs in instruments.yaml.
          Missing geometry must be mapped explicitly to tip: placeholder. -->
     <xacro:if value="${str(is_virtual).lower() not in ['true', '1']}">
       <xacro:include filename="$(find dvrk_model)/urdf/common/instruments/housing/housing_${housing}.urdf.xacro"/>
-      <xacro:call macro="${'housing_' + str(housing)}" prefix="${prefix}"/>
+      <xacro:call macro="${'housing_' + str(housing)}" prefix="${prefix}" variant="${housing_variant}"/>
     </xacro:if>
 
     <xacro:instrument_stage part="roll" code="${roll}" prefix="${prefix}" add_colors="${add_colors}"/>
@@ -73,7 +75,7 @@
   </xacro:macro>
 
   <xacro:macro name="instrument"
-               params="prefix instrument is_virtual:=false add_colors:=false">
+               params="prefix instrument is_virtual:=false add_colors:=false housing_variant:=$(arg housing_variant)">
     <xacro:property name="model" value="${instrument_table[str(instrument)]}"/>
     <xacro:if value="${xacro.message('Using instrument ' + str(instrument) + ': ' + str(model['name'])) or False}"/>
     <xacro:instrument_model prefix="${prefix}"
@@ -83,6 +85,7 @@
                             wrist_yaw="${model.get('wrist_yaw', 'none')}"
                             wrist="${model.get('wrist', 'standard')}"
                             tip="${model['tip']}"
+                            housing_variant="${housing_variant}"
                             is_virtual="${is_virtual}"
                             add_colors="${add_colors}"/>
 
