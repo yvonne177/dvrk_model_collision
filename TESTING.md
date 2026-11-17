@@ -3,6 +3,11 @@
 Copy and paste each command line-by-line to test all configurations.
 Press `Ctrl+C` to stop each test before running the next one.
 
+For single-arm simulation, `instrument` selects the visualization model only.
+The controller uses the tool in its installed system/arm JSON configuration.
+For non-default instruments (including cross-generation selections), configure
+the controller's tool separately before checking kinematic agreement.
+
 ---
 
 ## Single PSM Arms - Classic Generation
@@ -125,7 +130,7 @@ All instruments in `instruments.yaml`:
 python3 scripts/verify_instrument_tf.py --all
 ```
 
-## Instrument Assembly Regression Tests
+## Launch and Instrument Assembly Regression Tests
 
 With ROS and Xacro available:
 
@@ -133,7 +138,9 @@ With ROS and Xacro available:
 python3 -m unittest discover -s scripts/tests
 ```
 
-These tests expand a temporary source tree to verify that new roll and tip
+These tests verify that single-arm launches pass only the supported JSON
+configuration argument to `dvrk_system` and reject unsupported instruments.
+They also expand a temporary source tree to verify that new roll and tip
 parts are selected from the YAML without assembly changes, explicit
 placeholders work, and missing part files fail expansion.
 

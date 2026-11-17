@@ -64,9 +64,6 @@ def create_simulated_robot(context):
             raise RuntimeError(
                 'Unsupported PSM instrument: {}. Valid options:\n{}'.format(
                     instrument, supported_psm_instruments_message()))
-        # The tool index accepts a full model without a name via :MODEL.
-        # Revision 1 retains the existing 420006 default (before geared jaws).
-        arguments.extend(['--tool', '{}=:{}[1]'.format(arm, instrument)])
 
     return [Node(
         package='dvrk_robot',

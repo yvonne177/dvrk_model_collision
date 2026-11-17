@@ -180,12 +180,14 @@ There is also an optional `instrument` argument for PSM arms. When provided, it 
 - `instrument:=420006` → explicit Si 006 selection
 - `instrument:=400006` → explicit Classic 006 selection
 
-For single-arm kinematic simulation, the selected instrument configures both the URDF and `dvrk_system`.
-The launch file passes a per-arm `--tool` argument using the existing full-model
-selector (for example, `PSM1=:400007[1]`). It uses the installed system file
-and creates no temporary system or arm configurations. Revision 1 preserves
-the standard, non-geared 420006 default. This requires a `dvrk_robot` and
-`sawIntuitiveResearchKit` build supporting `--tool` and `arm_overrides`.
+For single-arm kinematic simulation, `instrument` selects the URDF instrument
+only. The launch file starts `dvrk_system` with the installed
+`system-<arm>_<generation>_KIN_SIMULATED.json` configuration (`Virtual` uses
+`Si`), without a command-line tool override or temporary configurations.
+The controller's tool is selected by the arm JSON referenced by that system
+configuration. When visualizing a different instrument, configure the
+controller's tool separately so its kinematics match the URDF. The standard
+Si simulation configuration already selects `420006[1]`.
 
 If `instrument` is omitted, `arm.launch.py` selects by generation:
 
